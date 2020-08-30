@@ -1,0 +1,25 @@
+{
+  "name": "shopping-list",
+  "version": "1.0.0",
+  "description": "learning",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MasterCoookie/shopping-list.git"
+  },
+  "author": "JK",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MasterCoookie/shopping-list/issues"
+  },
+  "homepage": "https://github.com/MasterCoookie/shopping-list#readme"
+}
