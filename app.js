@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose');
+const listsRoutes = require('./routes/listsRoutes');
 
 const app = express()
 const port = 3000
@@ -21,7 +22,9 @@ app.use(express.json());
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
+app.use('/mylists', listsRoutes);
+
 
 app.use((req, res) => {
-    res.status(404).render("404")
+    res.status(404).render("404", { title: 'Not Found :(' })
 })
