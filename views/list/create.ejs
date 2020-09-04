@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <h2>Create New Shopping List</h2>
+    <ul class="shopping-list">
+        <form action="/create" method="post">
+            <label for="name">List Name: </label><input type="text" name="name" id="name" />
+            <br>
+            <span data-no="0" id="0" class="prod-group">
+                <input type="text" name="porduct" class="porduct-name"/>
+                <input type="text" name="quantity" class="porduct-quan"/>
+            </span>
+            <span id="placeholder"></span>
+            <button id="add">+</button>
+                
+        </form>
+        <button id="submit">Create</button>
+    </ul>
+        
+
+    <%- include('../partials/footer.ejs') %>
+    <script>
+        let pordNum = 0;
+        document.getElementById('add').addEventListener('click', e => {
+            e.preventDefault();
+            
+            let listElementAdded = `<span data-no="${++pordNum}" id="${pordNum}" class="prod-group">
+<input type="text" name="porduct" class="porduct-name"/>
+<input type="text" name="quantity" class="porduct-quan"/>
+</span>`
+            document.getElementById('placeholder').innerHTML += listElementAdded;
+
+
+            
+        });
+
+        document.getElementById('submit').addEventListener('click', e => {
+            const groups = document.querySelectorAll('.prod-group');
+            console.log(groups);
+        });
+    </script>
+</body>
+</html>
