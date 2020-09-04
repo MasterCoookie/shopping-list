@@ -9,8 +9,8 @@
             <label for="name">List Name: </label><input type="text" name="name" id="name" />
             <br>
             <span data-no="0" id="0" class="prod-group">
-                <input type="text" name="porduct" class="porduct-name"/>
-                <input type="text" name="quantity" class="porduct-quan"/>
+                <input type="text" name="product" class="product-name"/>
+                <input type="text" name="quantity" class="product-quan"/>
             </span>
             <span id="placeholder"></span>
             <button id="add">+</button>
@@ -27,8 +27,8 @@
             e.preventDefault();
             
             let listElementAdded = `<span data-no="${++pordNum}" id="${pordNum}" class="prod-group">
-<input type="text" name="porduct" class="porduct-name"/>
-<input type="text" name="quantity" class="porduct-quan"/>
+<input type="text" name="product" class="product-name"/>
+<input type="text" name="quantity" class="product-quan"/>
 </span>`
             document.getElementById('placeholder').innerHTML += listElementAdded;
 
@@ -37,8 +37,18 @@
         });
 
         document.getElementById('submit').addEventListener('click', e => {
-            const groups = document.querySelectorAll('.prod-group');
-            console.log(groups);
+            // get name of list
+            const listName = document.getElementById('name').value
+
+            // getting list names and quan
+            const groups = Array.from(document.querySelectorAll('.prod-group'));
+            const prodNames = groups.map(group => {
+                return group.querySelector('.product-name').value;
+            });
+            const prodQuans = groups.map(group => {
+                return group.querySelector('.product-quan').value;
+            });
+            console.log(listName, prodNames, prodQuans);
         });
     </script>
 </body>
