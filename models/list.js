@@ -14,7 +14,10 @@ const listSchema = new Schema({
     prodList: [{
         prodName: String,
         prodQuan: Number,
-        prodChecked: Boolean
+        prodChecked: {
+            type: Boolean,
+            default: false
+        }
     }]
     
 }, { timestamps: true });

@@ -49,6 +49,12 @@
                 return group.querySelector('.product-quan').value;
             });
             console.log(listName, prodNames, prodQuans);
+
+            // prep data
+            const prodList = prodNames.map((product, index) => {
+                return { prodName: product, prodQuan: parseInt(prodQuans[index]) };
+            });
+            console.log(prodList);
         });
     </script>
 </body>
