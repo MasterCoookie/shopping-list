@@ -10,10 +10,19 @@
                 <p class="product-name"><%= prod.prodName %></p><p class="quantity"><%= prod.prodQuan %></p>
             </li>
         <% }); %> 
-        
     </ul>
+    <button id="delete">Delete</button>
         
 
     <%- include('../partials/footer.ejs') %>
 </body>
+<script>
+    document.getElementById('delete').addEventListener( e => {
+        fetch(`/mylists/list/${body._id}`, {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'DELETE',
+
+        })
+    })
+</script>
 </html>

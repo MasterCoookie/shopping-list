@@ -1,4 +1,5 @@
 const List = require('../models/list');
+const { response } = require('express');
 const objectId = require('mongodb').ObjectId;
 
 const list_get = (req, res) => {
@@ -7,8 +8,17 @@ const list_get = (req, res) => {
         res.render('list/list', { title: `List ${result.name}`, body: result });
     }).catch(err => {
         console.log(err);
-    })
+    });
+}
 
+const list_delete = (req, res) => {
+    const id = req.params.id;
+
+    List.findByIdAndDelete(id).then(result => {
+        res.json({ redirect: '/mylists' });
+    }).catch(err => {
+        console.log(err);
+    })
 }
 
 const allLists_get = (req, res) => {
@@ -34,5 +44,6 @@ module.exports = {
     list_get,
     allLists_get,
     create_get,
-    create_post
+    create_post,
+    list_delete
 }
