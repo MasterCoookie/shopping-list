@@ -1,4 +1,5 @@
 const List = require('../models/list');
+const objectId = require('mongodb').ObjectId;
 
 const list_get = (req, res) => {
     res.render('list/list', { title: 'List no ' });
@@ -13,7 +14,14 @@ const create_get = (req, res) => {
 }
 
 const create_post = (req, res) => {
-    console.log(req.body);
+    req.body.authorId = objectId(req.body.authorId);
+    const list = new List(req.body);
+
+    list.save().then(result => {
+        res.json({ redirect: '/mylists' });
+    }).catch(err => {
+        console.log(err);
+    })
 }
 
 module.exports = {
