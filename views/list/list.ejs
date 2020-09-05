@@ -3,22 +3,14 @@
 <%- include('../partials/head.ejs') %>
 <body>
     <%- include('../partials/nav.ejs') %>
-    <h2>Lista nr</h2>
+    <h2>List "<%= body.name %> "</h2>
     <ul class="shopping-list">
-        <li>
-            <p class="product-name">Full name</p><p class="quantity">quan</p>
-            
-        </li>
-        <li>
-            <p class="product-name">Full name</p><p class="quantity"></p>
-        </li>
-        <li>
-            <p class="product-name">Full name</p><p class="quantity">quan</p>
-            
-        </li>
-        <li>
-            <p class="product-name">Full name</p><p class="quantity"></p>
-        </li>
+        <% body.prodList.forEach(prod => { %>
+            <li class="<%= prod.prodChecked ? 'checked' : '' %>">
+                <p class="product-name"><%= prod.prodName %></p><p class="quantity"><%= prod.prodQuan %></p>
+            </li>
+        <% }); %> 
+        
     </ul>
         
 

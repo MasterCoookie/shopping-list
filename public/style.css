@@ -55,7 +55,7 @@ h2 {
     cursor: pointer;
 }
 
-.shopping-list li .checked {
+.shopping-list .checked {
     text-decoration: line-through;
 }
 
