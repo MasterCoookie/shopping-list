@@ -12,16 +12,26 @@
         <% }); %> 
     </ul>
     <button id="delete">Delete</button>
+    <span id="id" style="display: none;"><%= body._id %></span>
         
 
     <%- include('../partials/footer.ejs') %>
 </body>
 <script>
-    document.getElementById('delete').addEventListener( e => {
-        fetch(`/mylists/list/${body._id}`, {
-            headers: { 'Content-Type': 'application/json' },
-            method: 'DELETE',
-
+    document.getElementById('delete').addEventListener('click', e => {
+        const id = document.getElementById('id').innerText;
+        console.log(id);
+        const endpoint = `/mylists/list/${id}`;
+        fetch(endpoint, {
+            method: 'DELETE'
+        }).then(response => {
+            response.json().then(data => {
+                window.location.href = data.redirect;
+            }).catch(err => {
+                console.log(err);
+            })
+        }).catch(err => {
+            console.log(err);
         })
     })
 </script>
