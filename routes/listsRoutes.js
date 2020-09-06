@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/list/:id', listsController.list_get);
 router.delete('/list/:id', listsController.list_delete);
-router.get('/all', listsController.allLists_get);
+router.get('/', listsController.lists_get);
 router.get('/create', listsController.create_get);
 router.post('/create', listsController.create_post);
 

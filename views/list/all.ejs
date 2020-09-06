@@ -5,16 +5,12 @@
     <%- include('../partials/nav.ejs') %>
     <h2>All active lists</h2>
     <ul class="shopping-list">
-        <li>
-            <a ><p class="product-name">Full name</p></a>
+        <% lists.forEach(list => { %>
+            <li>
+            <a href="mylists/list/<%= list._id %>"><p class="product-name"><%= list.name %></p></a>
         </li>
-        <li>
-            <a ><p class="product-name">Full name</p></a>
-        </li>
-        <li>
-            <a ><p class="product-name">Full name</p></a>
-            
-        </li>
+        <% }); %> 
+        
     </ul>
         
 

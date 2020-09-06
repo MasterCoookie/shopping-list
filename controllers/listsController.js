@@ -21,8 +21,16 @@ const list_delete = (req, res) => {
     })
 }
 
-const allLists_get = (req, res) => {
-    res.render('list/all', { title: 'All Lists' });
+const lists_get = (req, res) => {
+    // TODO - get actuall id
+    authorId = objectId('4edd40c86762e0fb12000003');
+
+    List.find({ authorId }).then(result => {
+        res.render('list/all', { title: 'All Lists', lists: result });
+    }).catch(err => {
+        console.log(err);
+    })
+
 }
 
 const create_get = (req, res) => {
@@ -42,7 +50,7 @@ const create_post = (req, res) => {
 
 module.exports = {
     list_get,
-    allLists_get,
+    lists_get,
     create_get,
     create_post,
     list_delete
