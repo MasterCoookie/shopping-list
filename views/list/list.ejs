@@ -6,8 +6,8 @@
     <h2>List "<%= body.name %> "</h2>
     <ul class="shopping-list">
         <% body.prodList.forEach(prod => { %>
-            <li class="<%= prod.prodChecked ? 'checked' : '' %>">
-                <p class="product-name"><%= prod.prodName %></p><p class="quantity"><%= prod.prodQuan %></p>
+            <li data-element="prod" data-id="<%= prod._id %>" class="<%= prod.prodChecked ? 'checked' : '' %>">
+                <p data-element="prod" data-id="<%= prod._id %>" class="product-name"><%= prod.prodName %></p><p class="quantity"><%= prod.prodQuan %></p>
             </li>
         <% }); %> 
     </ul>
@@ -18,10 +18,9 @@
     <%- include('../partials/footer.ejs') %>
 </body>
 <script>
+    const endpointId = document.getElementById('id').innerText;
+    const endpoint = `/mylists/list/${endpointId}`;
     document.getElementById('delete').addEventListener('click', e => {
-        const id = document.getElementById('id').innerText;
-        console.log(id);
-        const endpoint = `/mylists/list/${id}`;
         fetch(endpoint, {
             method: 'DELETE'
         }).then(response => {
@@ -33,6 +32,17 @@
         }).catch(err => {
             console.log(err);
         })
+    });
+
+    document.addEventListener('click', event => {
+        if (event.target.getAttribute('data-element') === 'prod') {
+            const id = event.target.getAttribute('data-id');
+            fetch(endpoint, {
+                headers: {'Content-Type': 'application/json'},
+                method: 'PUT',
+                body: JSON.stringify({ id })
+            })
+        }
     })
 </script>
 </html>

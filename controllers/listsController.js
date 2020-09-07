@@ -21,6 +21,27 @@ const list_delete = (req, res) => {
     })
 }
 
+const list_put = (req, res) => {
+    const listId = req.params.id;
+    const prodId = req.body.id;
+
+    List.findById(listId).then(result => {
+        //console.log(result.prodList);
+        const updated = result.prodList.map(prod => {
+            if (prod._id.equals(objectId(prodId))) {
+                prod.pordChecked = !prod.pordChecked;
+                console.log(prod.pordChecked);
+                return prod;
+            } else {
+                return prod;
+            }
+        });
+        //console.log(updated);
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
 const lists_get = (req, res) => {
     // TODO - get actuall id
     authorId = objectId('4edd40c86762e0fb12000003');
@@ -53,5 +74,6 @@ module.exports = {
     lists_get,
     create_get,
     create_post,
-    list_delete
+    list_delete,
+    list_put
 }
