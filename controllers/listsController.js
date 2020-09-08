@@ -26,17 +26,16 @@ const list_put = (req, res) => {
     const prodId = req.body.id;
 
     List.findById(listId).then(result => {
-        //console.log(result.prodList);
+        console.log(result.prodList);
         const updated = result.prodList.map(prod => {
             if (prod._id.equals(objectId(prodId))) {
-                prod.pordChecked = !prod.pordChecked;
-                console.log(prod.pordChecked);
+                prod.prodChecked = !prod.prodChecked;
                 return prod;
             } else {
                 return prod;
             }
         });
-        //console.log(updated);
+        console.log(updated);
     }).catch(err => {
         console.log(err);
     })
