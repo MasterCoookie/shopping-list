@@ -1,5 +1,6 @@
 const List = require('../models/list');
 const { response } = require('express');
+const { update } = require('../models/list');
 const objectId = require('mongodb').ObjectId;
 
 const list_get = (req, res) => {
@@ -26,7 +27,6 @@ const list_put = (req, res) => {
     const prodId = req.body.id;
 
     List.findById(listId).then(result => {
-        console.log(result.prodList);
         const updated = result.prodList.map(prod => {
             if (prod._id.equals(objectId(prodId))) {
                 prod.prodChecked = !prod.prodChecked;
@@ -35,7 +35,11 @@ const list_put = (req, res) => {
                 return prod;
             }
         });
-        console.log(updated);
+        List.findByIdAndUpdate(listId, { prodList: updated }, { new: true }).then(updateResult => {
+            res.json({ redirect: `/mylists/list/${listId}` })
+        }).catch(err => {
+            console.log(err);
+        })
     }).catch(err => {
         console.log(err);
     })
