@@ -7,7 +7,7 @@ const port = 3000
 
 
 dbURI = 'mongodb+srv://admin:root@cluster0.gqhx8.mongodb.net/shopping-list?retryWrites=true&w=majority'
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }).then(result => {
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }).then(result => {
     console.log('DB connection established!');
     app.listen(port, () => console.log(`App listening for requests on port ${port}!`));
 }).catch(err => {
