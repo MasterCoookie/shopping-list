@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const listsRoutes = require('./routes/listsRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express()
 const port = 3000
@@ -20,7 +21,9 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', (req, res) => res.render('index', { title: 'Home' }));
+
+app.use('/', authRoutes);
 
 app.use('/mylists', listsRoutes);
 

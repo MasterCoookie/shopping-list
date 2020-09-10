@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/nav.ejs') %>
+
+    <form>
+        <h2>Sign up</h2>
+        <label for="email">Email</label>
+        <input type="text" name="email" required />
+        <div class="email error"></div>
+        <label for="password">Password</label>
+        <input type="password" name="password" required />
+        <div class="password error"></div>
+        <label for="password_r">Repeat Password</label>
+        <input type="password" name="password_r" required />
+        <button>Sign Up</button>
+    </form>
+        
+
+    <%- include('../partials/footer.ejs') %>
+    <script>
+        form = document.querySelector('form');
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const email = form[0].value;
+            const pass = form[1].value;
+            const passRepeat = form[2].value;
+            console.log(email, pass, passRepeat);
+
+        })
+    </script>
+</body>
