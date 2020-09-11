@@ -4,4 +4,17 @@ const signup_get = (req, res) => {
     res.render('auth/signup', { title: 'Sign Up Now!' });
 }
 
-module.exports = { signup_get }
+const signup_post = async (req, res) => {
+    const { name, email, password } = req.body
+
+    try {
+        const user = await User.create({ name, email, password });
+    } catch(err) {
+
+    }
+}
+
+module.exports = {
+    signup_get,
+    signup_post
+}
