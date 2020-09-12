@@ -8,6 +8,7 @@
         <h2>Sign up</h2>
         <label for="name">Full Name</label>
         <input type="text" name="name" required /><br>
+        <div class="name error"></div>
         <label for="email">Email</label>
         <input type="email" name="email" required />
         <div class="email error"></div>
@@ -29,6 +30,7 @@
             const email = form[1].value;
             const password = form[2].value;
             const passRepeat = form[3].value;
+            const nameErr = document.querySelector('.name.error');
             const emailErr = document.querySelector('.email.error');
             const passErr = document.querySelector('.password.error');
             
@@ -40,7 +42,15 @@
                     method: 'POST',
                     body: JSON.stringify({name, email, password})
                 }).then(response => {
-                    console.log(response);
+                    response.json().then(jsonData => {
+                        if(jsonData.errors) {
+                            nameErr.innerHTML = jsonData.errors.name;
+                            emailErr.innerHTML = jsonData.errors.email;
+                            passErr.innerHTML = jsonData.errors.password;
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                    })
                 }).catch(err => {
                     console.log(err);
                 })

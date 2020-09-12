@@ -18,8 +18,7 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Please Enter A Password'],
         minlength: [8, 'Your Password Has To Be At Least 8 Characters Long'],
-        maxlength: [24, 'Your Password Has To Be Less Than 24 Characters Long'],
-        
+        maxlength: [24, 'Your Password Has To Be Less Than 24 Characters Long']
     }
 });
 
