@@ -1,5 +1,9 @@
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
+const { use } = require('../routes/authRoutes');
+const secret = require('../secret');
 
+const maxAge = 24 * 60 * 60;
 const errorHandler = (err) => {
     let errors = { name: '', email: '', password: '' }
 
@@ -19,6 +23,10 @@ const errorHandler = (err) => {
     return errors;
 }
 
+const createToken = id => {
+    return jwt.sign({ id }, secret, { expiresIn: maxAge });
+}
+
 const signup_get = (req, res) => {
     res.render('auth/signup', { title: 'Sign Up Now!' });
 }
@@ -28,13 +36,39 @@ const signup_post = async (req, res) => {
 
     try {
         const user = await User.create({ name, email, password });
+        const token = createToken(user._id);
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+        res.status(201).json({ user: user._id })
     } catch(err) {
         const errors = errorHandler(err);
+        console.log(err);
         res.status(400).json({ errors });
     }
 }
 
+const login_get = (req, res) => {
+    res.render('auth/login', { title: 'Log in' });
+}
+
+const login_post = async (req, res) => {
+    const { email, password } = req.body;
+    
+    try {
+        const user = await User.login(email, password);
+
+        const token = createToken(user._id);
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+        res.status(201).json({ user: user._id });
+    } catch (err) {
+        const errors = errorHandler(err);
+        res.status(400).json({ errors });
+    }
+    
+}
+
 module.exports = {
     signup_get,
-    signup_post
+    signup_post,
+    login_get,
+    login_post
 }

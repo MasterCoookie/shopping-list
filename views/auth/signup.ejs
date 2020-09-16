@@ -47,6 +47,9 @@
                             nameErr.innerHTML = jsonData.errors.name;
                             emailErr.innerHTML = jsonData.errors.email;
                             passErr.innerHTML = jsonData.errors.password;
+                        } 
+                        if (jsonData.user) {
+                            location.assign('/');
                         }
                     }).catch(err => {
                         console.log(err);
