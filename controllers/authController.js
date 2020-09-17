@@ -12,7 +12,13 @@ const errorHandler = (err) => {
         return errors;
     }
 
-    //console.log(err.properties);
+    if(err.message == 'Incorrect Password') {
+        errors.password = 'Incorrect password';
+    }
+
+    if(err.message == 'Incorrect Email') {
+        errors.email = 'Email not registered';
+    }
 
     if(err.message.includes('user validation failed')){
         Object.values(err.errors).forEach(({ properties }) => {

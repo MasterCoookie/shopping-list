@@ -31,6 +31,16 @@
             headers: {'Content-Type': 'application/json'},
             method: 'POST',
             body: JSON.stringify(data)
+        }).then(response => {
+            response.json().then(jsonData => {
+                if(jsonData.errors){
+                    emailErr.innerHTML = jsonData.errors.email;
+                    pwdErr.innerHTML = jsonData.errors.password;
+                }
+                if(jsonData.user){
+                    location.assign('/mylists');
+                }
+            })
         })
     })
 </script>
