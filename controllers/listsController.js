@@ -1,6 +1,5 @@
 const List = require('../models/list');
 const { response } = require('express');
-const { update } = require('../models/list');
 const objectId = require('mongodb').ObjectId;
 
 const list_get = (req, res) => {
@@ -46,8 +45,7 @@ const list_put = (req, res) => {
 }
 
 const lists_get = (req, res) => {
-    // TODO - get actuall id
-    authorId = objectId('4edd40c86762e0fb12000003');
+    authorId = objectId(res.locals.user._id);
 
     List.find({ authorId }).then(result => {
         res.render('list/all', { title: 'All Lists', lists: result });

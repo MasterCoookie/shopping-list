@@ -6,6 +6,7 @@
     <h2>Create New Shopping List</h2>
     <ul class="shopping-list">
         <form action="/create" method="post">
+            <input type="hidden" name="authorId" value="<%= user._id %>" id="authorId">
             <label for="name">List Name: </label><input type="text" name="name" id="name" />
             <br>
             <span data-no="0" id="0" class="prod-group">
@@ -55,8 +56,7 @@
                 return { prodName: product, prodQuan: parseInt(prodQuans[index]) };
             });
             const data = {
-                // TODO
-                authorId: '4edd40c86762e0fb12000003',
+                authorId: document.getElementById('authorId').value,
                 name: listName,
                 prodList
              }
