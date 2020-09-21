@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <h2>All shared lists</h2>
+    <ul class="shopping-list">
+        <% lists.forEach(list => { %>
+            <li>
+            <a href="/mylists/list/<%= list._id %>"><p class="product-name"><%= list.name %></p></a>
+        </li>
+        <% }); %> 
+        
+    </ul>
+        
+
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>
