@@ -9,6 +9,8 @@ router.delete('/list/:id', listsController.list_delete);
 router.get('/', listsController.lists_get);
 router.get('/create', listsController.create_get);
 router.post('/create', listsController.create_post);
+router.get('/share/:id', listsController.share);
+router.get('/shared/', listsController.shared_get);
 
 
 module.exports = router;

@@ -18,7 +18,11 @@ const listSchema = new Schema({
             type: Boolean,
             default: false
         }
-    }]
+    }],
+    sharedWith: {
+        type: [Schema.Types.ObjectId],
+        default: undefined
+    }
     
 }, { timestamps: true });
 

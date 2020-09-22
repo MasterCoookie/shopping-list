@@ -70,11 +70,38 @@ const create_post = (req, res) => {
     })
 }
 
+const share = (req, res) => {
+    const listId = req.params.id;
+    const userId = res.locals.user._id;
+
+    if(listId == userId) {
+        res.redirect(`list/${listId}`);
+    } else {
+        List.findByIdAndUpdate(listId, { $push: { sharedWith: userId }}).then(result => {
+            res.redirect('/mylists/shared');
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+}
+
+const shared_get = (req, res) => {
+    const userId = res.locals.user._id;
+
+    List.find({ sharedWith: userId }).then(result => {
+        res.render('list/shared', { title: 'Shared Lists', lists: result });
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
 module.exports = {
     list_get,
     lists_get,
     create_get,
     create_post,
     list_delete,
-    list_put
+    list_put,
+    share,
+    shared_get
 }
